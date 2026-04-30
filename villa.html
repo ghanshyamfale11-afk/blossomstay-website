@@ -98,7 +98,7 @@
 
                 <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
                     <h3 class="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-utensils"></i> Food & Extras</h3>
-                    <ul class="space-y-3 text-blue-800">
+                    <ul class="space-y-3 text-blue-800" id="food-extras-list">
                         <li class="flex justify-between border-b border-blue-200 pb-2"><span>Meals (Proper Jain Food Available)</span> <strong>₹750 / person</strong></li>
                         <li class="flex justify-between border-b border-blue-200 pb-2"><span>BBQ Setup</span> <strong>₹150 / person</strong></li>
                         <li class="flex justify-between border-b border-blue-200 pb-2"><span>Extra Guest Charge</span> <strong>₹500 / person</strong></li>
@@ -125,7 +125,7 @@
                         <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-money-bill-transfer text-green-600 mr-2"></i> Cancellation & Refund Policy</h4>
                         <p class="text-xs text-gray-500 mb-3">Applicable only if 100% booking amount is paid.</p>
                         <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Cancel 25 days before – <strong>125% Refund</strong></li>
+                            <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Cancel 25 days before – <strong>100% Refund</strong></li>
                             <li><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i> Cancel 15 days before – <strong>50% Refund</strong></li>
                             <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> After 15 days – <strong>No Refund</strong></li>
                         </ul>
@@ -141,7 +141,7 @@
                     <div class="flex items-baseline justify-between mb-4 pb-4 border-b border-gray-100">
                         <div>
                             <span class="text-3xl font-bold text-gray-900" id="w-priceWd">₹0</span>
-                            <span class="text-gray-500 text-sm">/ weekday</span>
+                            <span class="text-gray-500 text-sm" id="price-unit">/ weekday</span>
                         </div>
                     </div>
 
@@ -158,40 +158,11 @@
 
                     <div class="space-y-4 mb-6">
                         <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200">
-                            <span class="text-gray-700 font-medium">Weekday</span>
+                            <span class="text-gray-700 font-medium" id="price-label-1">Weekday Rate</span>
                             <span class="font-bold text-gray-900" id="w-priceWd-2">₹0</span>
                         </div>
                         <div class="flex justify-between items-center bg-red-50 p-3 rounded-lg border border-red-100">
-                            <span class="text-red-700 font-medium">Weekend</span>
-                            <span class="font-bold text-red-600" id="w-priceWe">₹0</span>
-                        </div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <button onclick="bookViaWhatsApp()" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-md">
-                            <i class="fa-brands fa-whatsapp text-xl"></i> Check Availability
-                        </button>
-                        
-                        <button onclick="payViaUPI()" class="w-full bg-[#673AB7] text-white font-bold py-3 rounded-xl hover:bg-[#5E35B1] transition flex items-center justify-center gap-2 shadow-md">
-                            <i class="fa-solid fa-qrcode text-xl"></i> Pay 60% Booking Advance
-                        </button>
-
-                        <button onclick="sharePage()" class="w-full bg-white border-2 border-gray-900 text-gray-900 font-bold py-3 rounded-xl hover:bg-gray-50 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-share-nodes"></i> Share Villa
-                        </button>
-                    </div>
-                    
-                    <p class="text-center text-xs text-gray-400 mt-4 uppercase tracking-widest font-semibold">100% Booking Amount Required</p>
-                </div>
-            </div>
-
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200">
-                            <span class="text-gray-700 font-medium">Weekday Rate</span>
-                            <span class="font-bold text-gray-900" id="w-priceWd-2">₹0</span>
-                        </div>
-                        <div class="flex justify-between items-center bg-red-50 p-3 rounded-lg border border-red-100">
-                            <span class="text-red-700 font-medium">Weekend Rate</span>
+                            <span class="text-red-700 font-medium" id="price-label-2">Weekend Rate</span>
                             <span class="font-bold text-red-600" id="w-priceWe">₹0</span>
                         </div>
                         <div class="text-xs text-center text-green-600 font-bold bg-green-50 py-2 rounded">
@@ -203,6 +174,11 @@
                         <a id="whatsapp-btn" href="#" target="_blank" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fa-brands fa-whatsapp text-xl"></i> Book via WhatsApp
                         </a>
+                        
+                        <button onclick="payViaUPI()" class="w-full bg-[#673AB7] text-white font-bold py-3 rounded-xl hover:bg-[#5E35B1] transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-qrcode text-xl"></i> Pay 60% Booking Advance
+                        </button>
+
                         <button onclick="sharePage()" class="w-full bg-white border-2 border-gray-900 text-gray-900 font-bold py-3 rounded-xl hover:bg-gray-50 transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-share-nodes"></i> Share Villa
                         </button>
@@ -235,7 +211,7 @@
 
     <script>
         // =================================================================
-        // REPLACE THIS ARRAY WITH YOUR CODE FROM THE GRABBER TOOL
+        // VILLA DATA
         const villas = [
     {
         "id": "25",
@@ -1671,8 +1647,9 @@
         "bhk": 6,
         "title": "6 BHK GLASS HOUSE",
         "loc": "PAWNA / LONAVALA",
-        "priceWd": "22000",
-        "priceWe": "39000",
+        "priceWd": "1499",
+        "priceWe": "1499",
+        "isPerPersonOffer": true,
         "img": "public/villa/69c3f90b7e4d3.jpg",
         "guests": "Max 26 Guests",
         "gallery": [
@@ -2436,9 +2413,31 @@
                 document.getElementById('v-loc').innerText = villa.loc;
                 document.getElementById('v-guests').innerText = villa.guests;
                 document.getElementById('v-bhk').innerText = villa.bhk;
+                
+                // Normal Pricing Display
                 document.getElementById('w-priceWd').innerText = `₹${villa.priceWd}`;
                 document.getElementById('w-priceWd-2').innerText = `₹${villa.priceWd}`;
                 document.getElementById('w-priceWe').innerText = `₹${villa.priceWe}`;
+
+                // --- MAGIC HAPPENS HERE FOR THE GLASS HOUSE ---
+                if (villa.isPerPersonOffer) {
+                    // Update main price block
+                    document.getElementById('price-unit').innerText = '/ person';
+                    
+                    // Update Widget rows
+                    document.getElementById('price-label-1').innerText = 'Special Offer (PP)';
+                    document.getElementById('price-label-2').innerText = 'All Food & Extras';
+                    document.getElementById('w-priceWe').innerText = 'FREE (Included)';
+                    document.getElementById('w-priceWe').classList.replace('text-red-600', 'text-green-600');
+                    
+                    // Update Food & Extras list in the left column
+                    document.getElementById('food-extras-list').innerHTML = `
+                        <li class="flex justify-between border-b border-blue-200 pb-2"><span>Meals (Proper Jain Food Available)</span> <strong class="text-green-600">FREE (Included)</strong></li>
+                        <li class="flex justify-between border-b border-blue-200 pb-2"><span>BBQ Setup</span> <strong class="text-green-600">FREE (Included)</strong></li>
+                        <li class="flex justify-between border-b border-blue-200 pb-2"><span>Extra Guest Charge</span> <strong class="text-green-600">FREE (Included)</strong></li>
+                        <li class="flex justify-between"><span>Drinking Water</span> <strong class="text-green-600">Bisleri Provided</strong></li>
+                    `;
+                }
 
                 const waMessage = encodeURIComponent(`Hello, I am interested in booking ${villa.title}.`);
                 document.getElementById('whatsapp-btn').href = `https://wa.me/918796130125?text=${waMessage}`;
@@ -2546,7 +2545,8 @@
                 alert("Link copied to clipboard!");
             }
         }
-		// ==========================================
+        
+        // ==========================================
         // BOOKING & UPI LOGIC
         // ==========================================
         
@@ -2577,8 +2577,6 @@
             const urlParams = new URLSearchParams(window.location.search);
             const villa = villas.find(v => v.id === urlParams.get('id'));
             
-            // This grabs the weekday price as a baseline to pay. 
-            // In the future, you can write code to calculate exact dates!
             const amount = villa.priceWd; 
 
             // This creates the special UPI link that phones understand
