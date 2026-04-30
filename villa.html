@@ -145,18 +145,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 mb-4">
-                        <div class="border border-gray-200 rounded-lg p-2">
-                            <label class="block text-[10px] font-bold text-gray-500 uppercase">Check-In</label>
-                            <input type="date" id="checkin-date" class="w-full text-sm font-semibold text-gray-900 focus:outline-none">
-                        </div>
-                        <div class="border border-gray-200 rounded-lg p-2">
-                            <label class="block text-[10px] font-bold text-gray-500 uppercase">Check-Out</label>
-                            <input type="date" id="checkout-date" class="w-full text-sm font-semibold text-gray-900 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 mb-6">
+                    <div class="space-y-4 mb-6" id="standard-rates-box">
                         <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200">
                             <span class="text-gray-700 font-medium" id="price-label-1">Weekday Rate</span>
                             <span class="font-bold text-gray-900" id="w-priceWd-2">₹0</span>
@@ -171,9 +160,9 @@
                     </div>
 
                     <div class="space-y-3">
-                        <a id="whatsapp-btn" href="#" target="_blank" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-md">
-                            <i class="fa-brands fa-whatsapp text-xl"></i> Book via WhatsApp
-                        </a>
+                        <button onclick="bookViaWhatsApp()" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Check Availability
+                        </button>
                         
                         <button onclick="payViaUPI()" class="w-full bg-[#673AB7] text-white font-bold py-3 rounded-xl hover:bg-[#5E35B1] transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fa-solid fa-qrcode text-xl"></i> Pay 60% Booking Advance
@@ -221,7 +210,7 @@
         "priceWd": "2500",
         "priceWe": "5500",
         "img": "public/villa/697deba4b2c24.jpg",
-        "guests": "Max 3-4 Guests",
+        "guests": "Max 4 Guests",
         "gallery": [
             "public/villa/697a078eb008d.jpg",
             "public/villa/697a078eb0650.jpg",
@@ -253,7 +242,7 @@
         "priceWd": "2500",
         "priceWe": "5500",
         "img": "public/villa/697c496de583c.jpg",
-        "guests": "Max 3-4 Guests",
+        "guests": "Max 4 Guests",
         "gallery": [
             "public/villa/697a03e394a67.jpg",
             "public/villa/697a03e395796.jpg",
@@ -286,7 +275,7 @@
         "priceWd": "3000",
         "priceWe": "6000",
         "img": "public/villa/697de6820ce6d.jpg",
-        "guests": "Max 3-4 Guests",
+        "guests": "Max 4 Guests",
         "gallery": [
             "public/villa/697c4c67e9ff3.jpg",
             "public/villa/697c4c67ea5e2.jpg",
@@ -1619,7 +1608,7 @@
         "priceWd": "20000",
         "priceWe": "35000",
         "img": "public/villa/69c3f8c083d18.jpg",
-        "guests": "Max 35 Guests",
+        "guests": "Max 26 Guests",
         "gallery": [
             "public/villa/698ef6ab33bfe.jpg",
             "public/villa/698ef6ab340fd.jpg",
@@ -2378,11 +2367,12 @@
 ];
 
         // =================================================================
-        // DO NOT TOUCH ANYTHING BELOW THIS LINE
+        // LOGIC ENGINE
         // =================================================================
 
         let currentGallery = [];
         let currentImageIndex = 0;
+        let activeVilla = null;
 
         function formatPath(path) {
             if (path && path.startsWith('public/')) return './' + path;
@@ -2392,45 +2382,41 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const villaId = urlParams.get('id');
-            const villa = villas.find(v => v.id === villaId);
+            activeVilla = villas.find(v => v.id === villaId);
 
-            if (villa) {
+            if (activeVilla) {
                 document.getElementById('villa-content').style.display = 'block';
 
-                if (villa.gallery && villa.gallery.length > 0) {
-                    currentGallery = villa.gallery.map(formatPath);
+                if (activeVilla.gallery && activeVilla.gallery.length > 0) {
+                    currentGallery = activeVilla.gallery.map(formatPath);
                 } else {
-                    currentGallery = [formatPath(villa.img)];
+                    currentGallery = [formatPath(activeVilla.img)];
                 }
 
                 // Render Dynamic Gallery HTML
                 renderGalleryGrid(currentGallery);
 
                 // Inject Text
-                document.title = `${villa.title} | Novastay`;
-                document.getElementById('v-title').innerText = villa.title;
-                document.getElementById('v-loc-crumb').innerText = villa.loc;
-                document.getElementById('v-loc').innerText = villa.loc;
-                document.getElementById('v-guests').innerText = villa.guests;
-                document.getElementById('v-bhk').innerText = villa.bhk;
+                document.title = `${activeVilla.title} | Novastay`;
+                document.getElementById('v-title').innerText = activeVilla.title;
+                document.getElementById('v-loc-crumb').innerText = activeVilla.loc;
+                document.getElementById('v-loc').innerText = activeVilla.loc;
+                document.getElementById('v-guests').innerText = activeVilla.guests;
+                document.getElementById('v-bhk').innerText = activeVilla.bhk;
                 
                 // Normal Pricing Display
-                document.getElementById('w-priceWd').innerText = `₹${villa.priceWd}`;
-                document.getElementById('w-priceWd-2').innerText = `₹${villa.priceWd}`;
-                document.getElementById('w-priceWe').innerText = `₹${villa.priceWe}`;
+                document.getElementById('w-priceWd').innerText = `₹${activeVilla.priceWd}`;
+                document.getElementById('w-priceWd-2').innerText = `₹${activeVilla.priceWd}`;
+                document.getElementById('w-priceWe').innerText = `₹${activeVilla.priceWe}`;
 
                 // --- MAGIC HAPPENS HERE FOR THE GLASS HOUSE ---
-                if (villa.isPerPersonOffer) {
-                    // Update main price block
+                if (activeVilla.isPerPersonOffer) {
                     document.getElementById('price-unit').innerText = '/ person';
-                    
-                    // Update Widget rows
                     document.getElementById('price-label-1').innerText = 'Special Offer (PP)';
                     document.getElementById('price-label-2').innerText = 'All Food & Extras';
                     document.getElementById('w-priceWe').innerText = 'FREE (Included)';
                     document.getElementById('w-priceWe').classList.replace('text-red-600', 'text-green-600');
                     
-                    // Update Food & Extras list in the left column
                     document.getElementById('food-extras-list').innerHTML = `
                         <li class="flex justify-between border-b border-blue-200 pb-2"><span>Meals (Proper Jain Food Available)</span> <strong class="text-green-600">FREE (Included)</strong></li>
                         <li class="flex justify-between border-b border-blue-200 pb-2"><span>BBQ Setup</span> <strong class="text-green-600">FREE (Included)</strong></li>
@@ -2439,15 +2425,14 @@
                     `;
                 }
 
-                const waMessage = encodeURIComponent(`Hello, I am interested in booking ${villa.title}.`);
-                document.getElementById('whatsapp-btn').href = `https://wa.me/918796130125?text=${waMessage}`;
-
             } else {
                 document.getElementById('error-state').style.display = 'block';
             }
         });
 
-        // Smart Gallery Renderer (Adapts to 1, 2, 3, or 5+ images)
+        // ==========================================
+        // UI & INTERACTION LOGIC
+        // ==========================================
         function renderGalleryGrid(images) {
             const container = document.getElementById('dynamic-gallery');
             const len = images.length;
@@ -2485,7 +2470,6 @@
             container.innerHTML = html;
         }
 
-        // Lightbox Logic
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const counter = document.getElementById('lightbox-counter');
@@ -2493,19 +2477,16 @@
         function openLightbox(index) {
             if (!currentGallery || currentGallery.length === 0) return;
             if (index >= currentGallery.length) index = 0;
-            
             currentImageIndex = index;
             updateLightboxImage();
             
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
-            
             setTimeout(() => {
                 lightbox.classList.remove('opacity-0');
                 lightboxImg.classList.remove('scale-95');
                 lightboxImg.classList.add('scale-100');
             }, 10);
-            
             document.body.style.overflow = 'hidden';
         }
 
@@ -2513,7 +2494,6 @@
             lightbox.classList.add('opacity-0');
             lightboxImg.classList.remove('scale-100');
             lightboxImg.classList.add('scale-95');
-            
             setTimeout(() => {
                 lightbox.classList.add('hidden');
                 lightbox.classList.remove('flex');
@@ -2549,40 +2529,22 @@
         // ==========================================
         // BOOKING & UPI LOGIC
         // ==========================================
-        
-        // Put your actual UPI ID here (e.g., yournumber@paytm or yourname@okhdfcbank)
         const myUpiId = "your-upi-id@bank"; 
         const myBusinessName = "Novastay";
 
         function bookViaWhatsApp() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const villa = villas.find(v => v.id === urlParams.get('id'));
+            if(!activeVilla) return;
             
-            const checkin = document.getElementById('checkin-date').value;
-            const checkout = document.getElementById('checkout-date').value;
-            
-            let message = `Hello Novastay, I want to book *${villa.title}*.\n`;
-            if(checkin && checkout) {
-                message += `Dates: ${checkin} to ${checkout}\n`;
-            } else {
-                message += `(I haven't selected dates yet)\n`;
-            }
-            message += `Please confirm availability!`;
+            let message = `Hello Novastay, I want to check availability for *${activeVilla.title}*.\nPlease let me know the available dates and total cost.`;
 
             const waLink = `https://wa.me/918796130125?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
         }
 
         function payViaUPI() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const villa = villas.find(v => v.id === urlParams.get('id'));
-            
-            const amount = villa.priceWd; 
-
-            // This creates the special UPI link that phones understand
-            const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myBusinessName)}&am=${amount}&cu=INR&tn=Booking+Advance+${encodeURIComponent(villa.title)}`;
-            
-            // Open the link (works on mobile phones with UPI apps installed)
+            if(!activeVilla) return;
+            const amount = activeVilla.priceWd; 
+            const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myBusinessName)}&am=${amount}&cu=INR&tn=Booking+Advance+${encodeURIComponent(activeVilla.title)}`;
             window.location.href = upiLink;
         }
     </script>
