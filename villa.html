@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villa Details | Novastay</title>
+    <title>Villa Details | Blossom Stay</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -20,7 +20,7 @@
     <nav class="bg-white border-b border-gray-100 px-4 py-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="index.html" class="font-bold text-lg tracking-widest uppercase text-gray-800 hover:text-orange-600 transition">
-                Novastay
+                Blossom Stay
             </a>
             <div class="hidden md:flex gap-6 text-sm font-semibold uppercase tracking-wider">
                 <a href="index.html" class="text-gray-400 hover:text-gray-900 transition">Home</a>
@@ -2392,7 +2392,7 @@
                 renderGalleryGrid(currentGallery);
 
                 // Inject Text
-                document.title = `${activeVilla.title} | Novastay`;
+                document.title = `${activeVilla.title} | stay`;
                 document.getElementById('v-title').innerText = activeVilla.title;
                 document.getElementById('v-loc-crumb').innerText = activeVilla.loc;
                 document.getElementById('v-loc').innerText = activeVilla.loc;
@@ -2525,12 +2525,12 @@
         // BOOKING & UPI LOGIC
         // ==========================================
         const myUpiId = "your-upi-id@bank"; 
-        const myBusinessName = "Novastay";
+        const myBusinessName = "stay";
 
         function bookViaWhatsApp() {
             if(!activeVilla) return;
             
-            let message = `Hello Novastay, I want to check availability for *${activeVilla.title}*.\nPlease let me know the available dates and total cost.`;
+            let message = `Hello stay, I want to check availability for *${activeVilla.title}*.\nPlease let me know the available dates and total cost.`;
 
             const waLink = `https://wa.me/918796130125?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
