@@ -7,16 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #fcfcfc;}
         .serif { font-family: 'Playfair Display', serif; }
         body.lightbox-open { overflow: hidden; }
+        
+        /* Custom Flatpickr adjustments for the sidebar widget */
+        .flatpickr-input[readonly] {
+            background-color: #f9fafb !important;
+        }
     </style>
 </head>
 <body class="text-gray-900">
 
-    <!-- Navigation Bar -->
     <nav class="bg-white border-b border-gray-100 px-4 py-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="index.html" class="font-bold text-lg tracking-widest uppercase text-gray-800 hover:text-orange-600 transition">
@@ -33,10 +40,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8" id="villa-content" style="display: none;">
         
-        <!-- Header & Breadcrumb -->
         <div class="mb-6">
             <div class="flex items-center text-xs text-gray-500 mb-2 uppercase font-semibold tracking-wider">
                 <a href="index.html" class="hover:text-blue-500">Home</a>
@@ -51,15 +56,11 @@
             </div>
         </div>
 
-        <!-- DYNAMIC IMAGE GALLERY CONTAINER -->
         <div id="dynamic-gallery" class="grid grid-cols-1 md:grid-cols-4 gap-2 h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-10 relative">
-            <!-- Images will be injected here automatically by Javascript -->
-        </div>
+            </div>
 
-        <!-- Two Column Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             
-            <!-- LEFT COLUMN: Description & Details -->
             <div class="lg:col-span-2 space-y-10">
                 
                 <div class="flex flex-wrap gap-4 md:gap-8 pb-8 border-b border-gray-200">
@@ -134,7 +135,6 @@
 
             </div>
 
-            <!-- RIGHT COLUMN: Sticky Pricing Widget -->
             <div class="lg:col-span-1 relative">
                 <div class="sticky top-24 bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
                     
@@ -143,6 +143,11 @@
                             <span class="text-3xl font-bold text-gray-900" id="w-priceWd">₹0</span>
                             <span class="text-gray-500 text-sm" id="price-unit">/ weekday</span>
                         </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="villa-booking-dates" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Select Dates</label>
+                        <input type="text" id="villa-booking-dates" placeholder="Check-in  —  Check-out" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 font-semibold focus:outline-none focus:border-blue-500 cursor-pointer text-center transition-colors shadow-sm" readonly="readonly">
                     </div>
 
                     <div class="space-y-4 mb-6" id="standard-rates-box">
@@ -175,7 +180,6 @@
         </div>
     </main>
 
-    <!-- Full Screen Lightbox Modal -->
     <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col justify-center items-center backdrop-blur-sm transition-opacity duration-300 opacity-0">
         <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-gray-300 z-50 p-2"><i class="fa-solid fa-xmark"></i></button>
         <button onclick="changeSlide(-1)" class="absolute left-2 md:left-10 text-white text-4xl hover:text-gray-300 z-50 p-4"><i class="fa-solid fa-chevron-left"></i></button>
@@ -186,7 +190,6 @@
         <div id="lightbox-counter" class="absolute bottom-6 text-white text-sm font-medium tracking-widest bg-black/50 px-4 py-2 rounded-full">1 / 1</div>
     </div>
 
-    <!-- Error State -->
     <div id="error-state" class="text-center py-32" style="display: none;">
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Villa Not Found</h1>
         <p class="text-gray-500 mb-6">We couldn't find the villa you were looking for.</p>
@@ -196,6 +199,7 @@
     <script>
         // =================================================================
         // VILLA DATA
+        // =================================================================
         const villas = [
     {
         "id": "25",
@@ -2368,6 +2372,7 @@
         let currentGallery = [];
         let currentImageIndex = 0;
         let activeVilla = null;
+        let selectedDatesStr = ""; // Stores dates to send via WhatsApp
 
         function formatPath(path) {
             if (path && path.startsWith('public/')) return './' + path;
@@ -2392,7 +2397,7 @@
                 renderGalleryGrid(currentGallery);
 
                 // Inject Text
-                document.title = `${activeVilla.title} | stay`;
+                document.title = `${activeVilla.title} | Blossom Stay`;
                 document.getElementById('v-title').innerText = activeVilla.title;
                 document.getElementById('v-loc-crumb').innerText = activeVilla.loc;
                 document.getElementById('v-loc').innerText = activeVilla.loc;
@@ -2419,6 +2424,19 @@
                         <li class="flex justify-between"><span>Drinking Water</span> <strong class="text-green-600">Bisleri Provided</strong></li>
                     `;
                 }
+
+                // --- ACTIVATE LUXURY CALENDAR ---
+                flatpickr("#villa-booking-dates", {
+                    mode: "range",
+                    minDate: "today",
+                    dateFormat: "Y-m-d",
+                    altInput: true,
+                    altFormat: "M j, Y",
+                    showMonths: 1, // Single month works better for mobile and sidebars
+                    onChange: function(selectedDates, dateStr, instance) {
+                        selectedDatesStr = dateStr; // Captures the date to send on WhatsApp
+                    }
+                });
 
             } else {
                 document.getElementById('error-state').style.display = 'block';
@@ -2525,12 +2543,13 @@
         // BOOKING & UPI LOGIC
         // ==========================================
         const myUpiId = "your-upi-id@bank"; 
-        const myBusinessName = "stay";
+        const myBusinessName = "Blossom Stay";
 
         function bookViaWhatsApp() {
             if(!activeVilla) return;
             
-            let message = `Hello stay, I want to check availability for *${activeVilla.title}*.\nPlease let me know the available dates and total cost.`;
+            let dateText = selectedDatesStr ? `\n*Dates:* ${selectedDatesStr}` : "";
+            let message = `Hello Blossom Stay, I want to check availability for *${activeVilla.title}*.${dateText}\nPlease let me know the total cost.`;
 
             const waLink = `https://wa.me/918623832362?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
