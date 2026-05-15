@@ -132,7 +132,6 @@
 
     <script>
         // ALL YOUR EXTRACTED VILLA DATA 
-        // Completely mapped from your old index.html
         const villas = [
             // 1 BHK
             { bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697deba4b2c24.jpg", url: "villa-detail/25.html" },
@@ -191,7 +190,8 @@
 
             // 6 BHK
             { bhk: 6, title: "6 BHK DUBASH FARM", loc: "MAHABLESHWAR", priceWd: "20000", priceWe: "35000", img: "public/villa/69c3f8c083d18.jpg", url: "villa-detail/88.html" },
-            { bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/69c3f90b7e4d3.jpg", url: "villa-detail/87.html" },
+            // UPDATED GLASS HOUSE DATA TO REFLECT PP OFFER
+            { bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "1499", priceWe: "1499", isPerPersonOffer: true, img: "public/villa/69c3f90b7e4d3.jpg", url: "villa-detail/87.html" },
             { bhk: 6, title: "6 BHK PERCHE OFFGRID", loc: "LONAVALA / PAWNA", priceWd: "23000", priceWe: "39000", img: "public/villa/697f084cb5b66.jpg", url: "villa-detail/69.html" },
             { bhk: 6, title: "6 BHK BHUBTARA", loc: "LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/697f13c93e07b.jpg", url: "villa-detail/68.html" },
             { bhk: 6, title: "6 BHK LAKDAWALA BUNGALOW", loc: "LONAVALA", priceWd: "20000", priceWe: "38000", img: "public/villa/697f3c2842990.jpg", url: "villa-detail/67.html" },
@@ -224,16 +224,47 @@
             { bhk: 12, title: "12 BHK SINGARA VILLA", loc: "KARJAT", priceWd: "44000", priceWe: "88000", img: "public/villa/69d518437cf8f.jpg", url: "villa-detail/81.html" }
         ];
 
-        // Functions for Filtering and Rendering
+        // Global Variables for Dynamic Price Calculation
+        let globalWdCount = 0;
+        let globalWeCount = 0;
+        let globalTotalNights = 0;
+        let isDateSelected = false;
+
         const dynamicSections = document.getElementById('dynamic-sections');
         const searchInput = document.getElementById('searchInput');
         const bhkFilter = document.getElementById('bhkFilter');
         const locationFilter = document.getElementById('locationFilter');
 
         function createCard(v) {
-            // This pulls the number (like 25) out of the old "villa-detail/25.html" link
             const realId = v.url.replace('villa-detail/', '').replace('.html', '');
             
+            let priceHtml = '';
+            
+            // DYNAMIC PRICE CALCULATION LOGIC
+            if (isDateSelected) {
+                let baseWd = parseFloat(v.priceWd);
+                let baseWe = v.isPerPersonOffer ? parseFloat(v.priceWd) : parseFloat(v.priceWe);
+                let total = (globalWdCount * baseWd) + (globalWeCount * baseWe);
+                
+                priceHtml = `
+                    <div class="flex justify-between items-center bg-orange-50 px-3 py-2 rounded-lg border border-orange-100">
+                        <span class="text-orange-800 text-[11px] font-bold uppercase">Total for ${globalTotalNights} Nights</span>
+                        <span class="text-orange-600 font-extrabold text-[16px]">₹${total.toLocaleString('en-IN')}${v.isPerPersonOffer ? '<span class="text-xs font-medium lowercase text-orange-800 ml-1">/pp</span>' : ''}</span>
+                    </div>
+                `;
+            } else {
+                priceHtml = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-gray-500 text-[11px] font-medium uppercase">Weekdays</span>
+                        <span class="text-gray-800 font-bold text-[15px]">₹${parseFloat(v.priceWd).toLocaleString('en-IN')}${v.isPerPersonOffer ? '<span class="text-xs font-medium text-gray-500 ml-1">/pp</span>' : ''}</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-red-50 px-2 py-1 rounded">
+                        <span class="text-red-500 text-[11px] font-bold uppercase">Weekends</span>
+                        <span class="text-red-600 font-bold text-[15px]">₹${parseFloat(v.priceWe).toLocaleString('en-IN')}${v.isPerPersonOffer ? '<span class="text-xs font-medium text-red-400 ml-1">/pp</span>' : ''}</span>
+                    </div>
+                `;
+            }
+
             return `
                 <a href="villa.html?id=${realId}" class="villa-card group block shrink-0">
                     <div class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col">
@@ -247,15 +278,8 @@
                                 <i class="fa-solid fa-location-dot"></i> ${v.loc}
                             </div>
                             
-                            <div class="flex flex-col gap-2 mt-auto pt-3 border-t border-gray-100">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-500 text-[11px] font-medium uppercase">Weekdays</span>
-                                    <span class="text-gray-800 font-bold text-[15px]">₹${v.priceWd}</span>
-                                </div>
-                                <div class="flex justify-between items-center bg-red-50 px-2 py-1 rounded">
-                                    <span class="text-red-500 text-[11px] font-bold uppercase">Weekends</span>
-                                    <span class="text-red-600 font-bold text-[15px]">₹${v.priceWe}</span>
-                                </div>
+                            <div class="flex flex-col mt-auto pt-3 border-t border-gray-100 min-h-[60px] justify-end">
+                                ${priceHtml}
                             </div>
                         </div>
                     </div>
@@ -268,7 +292,6 @@
             const bhkVal = bhkFilter.value;
             const locVal = locationFilter.value.toLowerCase();
 
-            // Filter data
             const filtered = villas.filter(v => {
                 const matchSearch = v.title.toLowerCase().includes(search) || v.loc.toLowerCase().includes(search);
                 const matchBhk = bhkVal === 'All' || v.bhk.toString() === bhkVal;
@@ -276,14 +299,12 @@
                 return matchSearch && matchBhk && matchLoc;
             });
 
-            // Group by BHK
             const grouped = filtered.reduce((acc, v) => {
                 if (!acc[v.bhk]) acc[v.bhk] = [];
                 acc[v.bhk].push(v);
                 return acc;
             }, {});
 
-            // Generate HTML
             dynamicSections.innerHTML = '';
             
             if(Object.keys(grouped).length === 0) {
@@ -296,7 +317,6 @@
                 return;
             }
 
-            // Sort keys numerically (1, 2, 3... 12)
             const sortedBhkKeys = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
 
             sortedBhkKeys.forEach(bhk => {
@@ -321,11 +341,9 @@
             });
         }
 
-        // Horizontal Scrolling Logic
         window.scrollSection = function(id, direction) {
             const container = document.getElementById(id);
             if (container) {
-                // Scroll width of one card + gap
                 const scrollAmount = (window.innerWidth > 768 ? 370 : 320) * direction;
                 container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             }
@@ -338,25 +356,53 @@
             renderVillas();
         }
 
-        // Attach listeners for Instant Filtering
         searchInput.addEventListener('input', renderVillas);
         bhkFilter.addEventListener('change', renderVillas);
         locationFilter.addEventListener('change', renderVillas);
 
-        // Initial Render
         renderVillas();
 
     </script>
     
     <script>
-        // Activate Luxury Calendar
+        // Activate Luxury Calendar WITH Global Calculation Logic
         flatpickr("#blossom-dates", {
             mode: "range",
             minDate: "today",
             dateFormat: "Y-m-d",
             altInput: true,
-            altFormat: "M j, Y", // Looks clean, e.g., Oct 15, 2026
-            showMonths: window.innerWidth > 768 ? 2 : 1, // Shows 2 months on desktop
+            altFormat: "M j, Y",
+            showMonths: window.innerWidth > 768 ? 2 : 1,
+            onChange: function(selectedDates) {
+                // If a full date range is selected
+                if (selectedDates.length === 2) {
+                    let wdCount = 0;
+                    let weCount = 0;
+                    let currentDate = new Date(selectedDates[0]);
+                    let endDate = selectedDates[1];
+                    
+                    while (currentDate < endDate) {
+                        let day = currentDate.getDay();
+                        // 5 = Friday, 6 = Saturday (Weekend Rates)
+                        if (day === 5 || day === 6) {
+                            weCount++;
+                        } else {
+                            wdCount++;
+                        }
+                        currentDate.setDate(currentDate.getDate() + 1);
+                    }
+                    
+                    globalWdCount = wdCount;
+                    globalWeCount = weCount;
+                    globalTotalNights = wdCount + weCount;
+                    isDateSelected = true;
+                } else {
+                    isDateSelected = false;
+                }
+                
+                // Immediately refresh all villa cards with new prices
+                renderVillas();
+            }
         });
     </script>
 </body>
