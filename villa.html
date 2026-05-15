@@ -161,6 +161,17 @@
                         </div>
                     </div>
 
+                    <div id="dynamic-total-box" class="hidden mb-6 p-4 bg-orange-50 rounded-xl border border-orange-200 shadow-inner">
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="text-orange-900 font-bold" id="total-nights-label">Total</span>
+                            <span class="text-2xl font-black text-orange-600" id="calculated-total-price">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-orange-700 font-medium">
+                            <span id="price-breakdown">0 Wd, 0 We</span>
+                            <span id="per-person-tag" class="hidden">/ person</span>
+                        </div>
+                    </div>
+
                     <div class="space-y-3">
                         <button onclick="bookViaWhatsApp()" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fa-brands fa-whatsapp text-xl"></i> Check Availability
@@ -2393,10 +2404,8 @@
                     currentGallery = [formatPath(activeVilla.img)];
                 }
 
-                // Render Dynamic Gallery HTML
                 renderGalleryGrid(currentGallery);
 
-                // Inject Text
                 document.title = `${activeVilla.title} | Blossom Stay`;
                 document.getElementById('v-title').innerText = activeVilla.title;
                 document.getElementById('v-loc-crumb').innerText = activeVilla.loc;
@@ -2404,12 +2413,10 @@
                 document.getElementById('v-guests').innerText = activeVilla.guests;
                 document.getElementById('v-bhk').innerText = activeVilla.bhk;
                 
-                // Normal Pricing Display
-                document.getElementById('w-priceWd').innerText = `₹${activeVilla.priceWd}`;
-                document.getElementById('w-priceWd-2').innerText = `₹${activeVilla.priceWd}`;
-                document.getElementById('w-priceWe').innerText = `₹${activeVilla.priceWe}`;
+                document.getElementById('w-priceWd').innerText = `₹${parseFloat(activeVilla.priceWd).toLocaleString('en-IN')}`;
+                document.getElementById('w-priceWd-2').innerText = `₹${parseFloat(activeVilla.priceWd).toLocaleString('en-IN')}`;
+                document.getElementById('w-priceWe').innerText = `₹${parseFloat(activeVilla.priceWe).toLocaleString('en-IN')}`;
 
-                // --- MAGIC HAPPENS HERE FOR THE GLASS HOUSE ---
                 if (activeVilla.isPerPersonOffer) {
                     document.getElementById('price-unit').innerText = '/ person';
                     document.getElementById('price-label-1').innerText = 'Special Offer (PP)';
@@ -2425,16 +2432,16 @@
                     `;
                 }
 
-                // --- ACTIVATE LUXURY CALENDAR ---
                 flatpickr("#villa-booking-dates", {
                     mode: "range",
                     minDate: "today",
                     dateFormat: "Y-m-d",
                     altInput: true,
                     altFormat: "M j, Y",
-                    showMonths: 1, // Single month works better for mobile and sidebars
+                    showMonths: 1,
                     onChange: function(selectedDates, dateStr, instance) {
-                        selectedDatesStr = dateStr; // Captures the date to send on WhatsApp
+                        selectedDatesStr = dateStr; 
+                        calculateDynamicTotal(selectedDates); // Triggers Calculation
                     }
                 });
 
@@ -2442,6 +2449,56 @@
                 document.getElementById('error-state').style.display = 'block';
             }
         });
+
+        // --- DYNAMIC PRICE CALCULATION ---
+        let calculatedTotalAmount = 0;
+        let totalNightsCount = 0;
+
+        function calculateDynamicTotal(selectedDates) {
+            const totalBox = document.getElementById('dynamic-total-box');
+            
+            if (!selectedDates || selectedDates.length !== 2) {
+                totalBox.classList.add('hidden');
+                calculatedTotalAmount = 0;
+                return;
+            }
+
+            const startDate = selectedDates[0];
+            const endDate = selectedDates[1];
+            
+            let wdCount = 0;
+            let weCount = 0;
+            let totalCost = 0;
+            let currentDate = new Date(startDate);
+
+            const baseWdPrice = parseFloat(activeVilla.priceWd);
+            const baseWePrice = activeVilla.isPerPersonOffer ? parseFloat(activeVilla.priceWd) : parseFloat(activeVilla.priceWe);
+
+            while (currentDate < endDate) {
+                const day = currentDate.getDay();
+                if (day === 5 || day === 6) { // Friday & Saturday
+                    weCount++;
+                    totalCost += baseWePrice;
+                } else {
+                    wdCount++;
+                    totalCost += baseWdPrice;
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            totalNightsCount = wdCount + weCount;
+            calculatedTotalAmount = totalCost;
+
+            document.getElementById('total-nights-label').innerText = `Total for ${totalNightsCount} Nights`;
+            document.getElementById('calculated-total-price').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
+            document.getElementById('price-breakdown').innerText = `(${wdCount} Weekdays, ${weCount} Weekends)`;
+            
+            if(activeVilla.isPerPersonOffer) {
+                document.getElementById('per-person-tag').classList.remove('hidden');
+            }
+
+            totalBox.classList.remove('hidden');
+        }
 
         // ==========================================
         // UI & INTERACTION LOGIC
@@ -2549,7 +2606,10 @@
             if(!activeVilla) return;
             
             let dateText = selectedDatesStr ? `\n*Dates:* ${selectedDatesStr}` : "";
-            let message = `Hello Blossom Stay, I want to check availability for *${activeVilla.title}*.${dateText}\nPlease let me know the total cost.`;
+            let priceText = calculatedTotalAmount > 0 ? `\n*Calculated Stay Total:* ₹${calculatedTotalAmount.toLocaleString('en-IN')} (for ${totalNightsCount} nights)` : "";
+            if (activeVilla.isPerPersonOffer && calculatedTotalAmount > 0) priceText += " per person";
+
+            let message = `Hello Blossom Stay, I want to check availability for *${activeVilla.title}*.${dateText}${priceText}\nPlease let me know the details.`;
 
             const waLink = `https://wa.me/918623832362?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
@@ -2557,8 +2617,9 @@
 
         function payViaUPI() {
             if(!activeVilla) return;
-            const amount = activeVilla.priceWd; 
-            const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myBusinessName)}&am=${amount}&cu=INR&tn=Booking+Advance+${encodeURIComponent(activeVilla.title)}`;
+            const totalForAdvance = calculatedTotalAmount > 0 ? calculatedTotalAmount : activeVilla.priceWd;
+            const advanceAmount = totalForAdvance * 0.60;
+            const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myBusinessName)}&am=${advanceAmount}&cu=INR&tn=60%25+Advance+${encodeURIComponent(activeVilla.title)}`;
             window.location.href = upiLink;
         }
     </script>
