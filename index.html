@@ -11,10 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
         
         body { font-family: 'Inter', sans-serif; background-color: #fcfcfc;}
         .serif { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
         
         /* Hide scrollbar for carousels but keep functionality */
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -36,51 +38,55 @@
             }
         }
 
-        /* Custom Flatpickr adjustments to match Tailwind's focus rings */
+        /* Custom Flatpickr adjustments for the dark transparent hero bar */
         .flatpickr-input[readonly] {
-            background-color: #f9fafb !important;
+            background-color: transparent !important;
+            color: white !important;
+        }
+        
+        /* Ensures dropdown options are readable */
+        option {
+            color: black;
+            background: white;
         }
     </style>
 </head>
 <body class="text-gray-900">
 
-    <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 px-4 py-3 shadow-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center justify-between w-full md:w-auto">
-                <a href="index.html" class="font-bold text-lg tracking-widest uppercase text-gray-800 hover:text-orange-600 transition">
-                    Blossom Stay
-                </a>
-                <button class="md:hidden text-gray-600"><i class="fa-solid fa-bars text-xl"></i></button>
-            </div>
+    <div class="bg-[#d4af37] text-black text-center py-2 px-4 text-xs md:text-sm font-bold tracking-widest z-50 relative">
+        WEBSITE CURRENTLY UNDER MAINTENANCE. OUR CONCIERGE TEAM REMAINS AVAILABLE ON CALL AT +91 98765 43210.
+    </div>
 
-            <div class="hidden md:flex gap-6 text-sm font-semibold uppercase tracking-wider">
-                <a href="index.html" class="text-orange-600 border-b-2 border-orange-600 pb-1">Home</a>
-                <a href="about-us.html" class="text-gray-400 hover:text-gray-900 transition">About Us</a>
-                <a href="contact-us.html" class="text-gray-400 hover:text-gray-900 transition">Contact</a>
+    <nav class="absolute top-10 left-0 w-full z-40 px-4 py-4 md:py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="serif text-xl md:text-2xl font-bold tracking-widest uppercase text-[#d4af37]">
+                Blossom Stay
+            </a>
+            <div class="hidden md:flex gap-8 text-xs font-semibold uppercase tracking-widest text-white">
+                <a href="index.html" class="text-[#d4af37] border-b border-[#d4af37] pb-1">Our Villas</a>
+                <a href="about-us.html" class="hover:text-[#d4af37] transition">About Us</a>
+                <a href="contact-us.html" class="hover:text-[#d4af37] transition">Contact</a>
             </div>
+            <a href="#" class="hidden md:block border border-[#d4af37] text-[#d4af37] px-6 py-2 text-xs font-bold tracking-widest hover:bg-[#d4af37] hover:text-black transition">
+                GUEST PORTAL
+            </a>
+            <button class="md:hidden text-[#d4af37]"><i class="fa-solid fa-bars text-2xl"></i></button>
+        </div>
+    </nav>
 
-            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-center md:justify-end">
-                <div class="relative flex-1 min-w-[140px] md:w-48">
-                    <input type="text" id="searchInput" placeholder="Search By Name" class="w-full pl-3 pr-8 py-2 bg-gray-50 border border-gray-200 rounded text-sm focus:outline-none focus:border-orange-500 transition-colors">
-                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-gray-400 text-xs"></i>
-                </div>
-                
-                <input type="text" id="blossom-dates" placeholder="Check-in - Check-out" class="px-3 py-2 bg-gray-50 border border-gray-200 rounded text-sm text-gray-600 font-medium focus:outline-none focus:border-orange-500 cursor-pointer min-w-[180px] md:w-56 text-center" readonly="readonly">
-                
-                <select id="bhkFilter" class="px-2 py-2 bg-gray-50 border border-gray-200 rounded text-sm text-gray-600 font-medium focus:outline-none cursor-pointer">
-                    <option value="All">All BHK</option>
-                    <option value="1">1 BHK</option>
-                    <option value="2">2 BHK</option>
-                    <option value="3">3 BHK</option>
-                    <option value="4">4 BHK</option>
-                    <option value="5">5 BHK</option>
-                    <option value="6">6 BHK</option>
-                    <option value="7">7 BHK</option>
-                    <option value="8">8 BHK</option>
-                    <option value="10">10 BHK</option>
-                    <option value="12">12 BHK</option>
-                </select>
-                <select id="locationFilter" class="px-2 py-2 bg-gray-50 border border-gray-200 rounded text-sm text-gray-600 font-medium focus:outline-none cursor-pointer">
+    <section class="relative h-[85vh] md:h-screen flex flex-col items-center justify-center text-center px-4">
+        <div class="absolute inset-0 bg-[#1a1a1a] bg-cover bg-center z-[-1] brightness-[0.6]" style="background-image: url('public/villa/69c3f90b7e4d3.jpg');"></div>
+        
+        <div class="z-10 mb-20">
+            <h4 class="text-[#d4af37] text-xs md:text-sm font-bold tracking-[0.2em] mb-4 uppercase">Redefining Luxury Travel</h4>
+            <h1 class="serif text-white text-5xl md:text-7xl leading-tight font-normal">Curated Villas.<br>Unmatched Elegance.</h1>
+        </div>
+
+        <div class="absolute bottom-[-10px] md:bottom-12 w-11/12 max-w-5xl bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 shadow-2xl z-20 flex flex-col md:flex-row gap-4">
+            
+            <div class="flex-1 flex flex-col text-left">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-1">Destination</label>
+                <select id="locationFilter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
                     <option value="All">All Locations</option>
                     <option value="Karjat">Karjat</option>
                     <option value="Lonavala">Lonavala</option>
@@ -92,26 +98,85 @@
                     <option value="Mahableshwar">Mahableshwar</option>
                 </select>
             </div>
-        </div>
-    </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-12 space-y-12" id="main-content">
-      <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-900 group">
+            <div class="flex-1 flex flex-col text-left">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-1">Check-in / Out</label>
+                <input type="text" id="blossom-dates" placeholder="Select Dates" class="w-full bg-transparent border-b border-white/30 pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer" readonly="readonly">
+            </div>
+
+            <div class="flex-1 flex flex-col text-left">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-1">Bedrooms</label>
+                <select id="bhkFilter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
+                    <option value="All">Any Size</option>
+                    <option value="1">1 BHK</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4">4 BHK</option>
+                    <option value="5">5 BHK</option>
+                    <option value="6">6 BHK</option>
+                    <option value="7">7 BHK</option>
+                    <option value="8">8 BHK</option>
+                    <option value="10">10 BHK</option>
+                    <option value="12">12 BHK</option>
+                </select>
+            </div>
+
+            <div class="flex-1 flex flex-col text-left">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-1">Search</label>
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Villa Name..." class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] placeholder-white/70">
+                    <i class="fa-solid fa-magnifying-glass absolute right-2 top-1 text-white/50 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#111111] text-white py-24 px-4 text-center mt-12 md:mt-0">
+        <h5 class="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4">The BlossomStay Standard</h5>
+        <h2 class="serif text-3xl md:text-5xl font-normal mb-16">Elevating Your Escape</h2>
+        
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4">
+            <div>
+                <i class="fa-solid fa-sparkles text-[#d4af37] text-3xl mb-6"></i>
+                <h3 class="text-sm font-bold tracking-widest uppercase mb-4">Bespoke Vacations</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Unique itineraries tailored to your personal preferences, ensuring a one-of-a-kind luxury experience.</p>
+            </div>
+            <div>
+                <i class="fa-solid fa-house text-[#d4af37] text-3xl mb-6"></i>
+                <h3 class="text-sm font-bold tracking-widest uppercase mb-4">Curated Properties</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Hand-selected villa rentals across India, expertly verified to match your high standards.</p>
+            </div>
+            <div>
+                <i class="fa-solid fa-briefcase text-[#d4af37] text-3xl mb-6"></i>
+                <h3 class="text-sm font-bold tracking-widest uppercase mb-4">24/7 Concierge</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">A dedicated team that anticipates your every need and provides exceptional service for all requests.</p>
+            </div>
+            <div>
+                <i class="fa-regular fa-face-smile text-[#d4af37] text-3xl mb-6"></i>
+                <h3 class="text-sm font-bold tracking-widest uppercase mb-4">Chef & Spa Services</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Delight in private, in-villa dining by expert chefs and rejuvenating spa treatments for total relaxation.</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 py-16 space-y-16" id="main-content">
+        
+        <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-900 group">
             <div class="absolute inset-0">
                 <img src="public/villa/69c3f90b7e4d3.jpg" onerror="this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'" alt="Glass House Offer" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 <div class="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent"></div>
             </div>
 
             <div class="relative p-8 md:p-12 lg:p-16 max-w-3xl flex flex-col justify-center h-full text-white">
-                <h3 class="text-yellow-400 font-bold tracking-wider text-sm md:text-base uppercase mb-2">Special Offer: Experience The Glass House</h3>
+                <h3 class="text-[#d4af37] font-bold tracking-wider text-sm md:text-base uppercase mb-2">Special Offer: Experience The Glass House</h3>
                 <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">JUST ₹1499/- <span class="text-2xl md:text-3xl font-semibold">PP</span></h1>
-                <h2 class="text-xl md:text-2xl font-bold mb-4">ALL FOOD & EXTRAS INCLUDED <span class="text-yellow-400">(FREE)</span></h2>
+                <h2 class="text-xl md:text-2xl font-bold mb-4">ALL FOOD & EXTRAS INCLUDED <span class="text-[#d4af37]">(FREE)</span></h2>
                 <p class="text-gray-200 text-sm md:text-base mb-8 max-w-xl leading-relaxed">
-                    <strong class="text-yellow-400">Includes:</strong> All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.
+                    <strong class="text-[#d4af37]">Includes:</strong> All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
-                    <a href="villa.html?id=87" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
+                    <a href="villa.html?id=87" class="bg-[#d4af37] hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
                         View Glass House Details
                     </a>
                 </div>
@@ -122,16 +187,74 @@
 
     </main>
 
+    <section class="bg-gray-50 py-20 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-[#d4af37] font-bold tracking-widest uppercase text-xs mb-3">Guest Journal</h5>
+                <h2 class="serif text-4xl md:text-5xl font-normal text-gray-900">Unforgettable Stays</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="reviews-container">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div>
+                        <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                            "Your real review will go right here. The typography is set up to look clean, elegant, and easy to read."
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-50 pt-4">
+                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div>
+                        <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                            "Another spot for a glowing review. This grid layout adjusts automatically for mobile phones."
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-50 pt-4">
+                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div>
+                        <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                            "We can add as many of these cards as you need. Just drop the text in!"
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-50 pt-4">
+                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <a href="https://wa.me/" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 z-50">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm mt-12">
+    <footer class="bg-[#111111] text-gray-400 py-12 text-center text-sm border-t border-gray-800">
+        <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
         <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
     </footer>
 
     <script>
-        // ALL YOUR EXTRACTED VILLA DATA 
         const villas = [
             // 1 BHK
             { bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697deba4b2c24.jpg", url: "villa-detail/25.html" },
@@ -190,7 +313,6 @@
 
             // 6 BHK
             { bhk: 6, title: "6 BHK DUBASH FARM", loc: "MAHABLESHWAR", priceWd: "20000", priceWe: "35000", img: "public/villa/69c3f8c083d18.jpg", url: "villa-detail/88.html" },
-            // UPDATED GLASS HOUSE DATA TO REFLECT PP OFFER
             { bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "1499", priceWe: "1499", isPerPersonOffer: true, img: "public/villa/69c3f90b7e4d3.jpg", url: "villa-detail/87.html" },
             { bhk: 6, title: "6 BHK PERCHE OFFGRID", loc: "LONAVALA / PAWNA", priceWd: "23000", priceWe: "39000", img: "public/villa/697f084cb5b66.jpg", url: "villa-detail/69.html" },
             { bhk: 6, title: "6 BHK BHUBTARA", loc: "LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/697f13c93e07b.jpg", url: "villa-detail/68.html" },
@@ -274,7 +396,7 @@
                         <div class="p-4 flex flex-col flex-grow">
                             <h3 class="font-bold text-gray-800 text-[15px] leading-tight mb-2 line-clamp-2">${v.title}</h3>
                             
-                            <div class="flex items-center gap-1 text-blue-500 text-xs font-semibold mb-3 uppercase tracking-wider">
+                            <div class="flex items-center gap-1 text-[#d4af37] text-xs font-bold mb-3 uppercase tracking-wider">
                                 <i class="fa-solid fa-location-dot"></i> ${v.loc}
                             </div>
                             
@@ -312,7 +434,7 @@
                     <div class="text-center py-20 text-gray-500">
                         <i class="fa-solid fa-magnifying-glass text-4xl mb-4 opacity-30"></i>
                         <p class="text-lg">No villas found matching your filters.</p>
-                        <button onclick="clearFilters()" class="text-blue-500 mt-2 hover:underline">Clear Filters</button>
+                        <button onclick="clearFilters()" class="text-[#d4af37] mt-2 hover:underline font-bold">Clear Filters</button>
                     </div>`;
                 return;
             }
@@ -324,8 +446,8 @@
                     <section class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-50">
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
-                                <h2 class="serif text-2xl md:text-3xl font-bold text-gray-800">${bhk} BHK Luxury Villas</h2>
-                                <span class="bg-gray-800 text-white text-[10px] px-2 py-1 rounded font-bold tracking-wider">${grouped[bhk].length} Properties</span>
+                                <h2 class="serif text-2xl md:text-3xl font-bold text-gray-900">${bhk} BHK Luxury Villas</h2>
+                                <span class="bg-[#d4af37] text-black text-[10px] px-2 py-1 rounded font-bold tracking-wider">${grouped[bhk].length} Properties</span>
                             </div>
                             <div class="flex gap-2">
                                 <button onclick="scrollSection('carousel-${bhk}', -1)" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-500 hover:text-gray-800 transition"><i class="fa-solid fa-chevron-left"></i></button>
