@@ -14,11 +14,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
         
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc;}
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #ffffff; }
         .serif { font-family: 'Playfair Display', serif; }
         .font-body { font-family: 'Montserrat', sans-serif; }
         
-        /* Custom Flatpickr adjustments for the dark transparent hero bar */
+        /* Hide scrollbar for carousels but keep functionality */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .scroll-container {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Flatpickr adjustments */
         .flatpickr-input[readonly] {
             background-color: transparent !important;
             color: white !important;
@@ -31,9 +39,9 @@
         }
     </style>
 </head>
-<body class="text-gray-900">
+<body class="bg-black text-white">
 
-    <nav class="absolute top-10 left-0 w-full z-40 px-4 py-4 md:py-6">
+    <nav class="absolute top-0 left-0 w-full z-40 px-4 py-6 md:py-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="index.html" class="serif text-xl md:text-2xl font-bold tracking-widest uppercase text-[#d4af37]">
                 Blossom Stay
@@ -50,15 +58,15 @@
         </div>
     </nav>
 
-    <section class="relative h-[85vh] md:h-screen flex flex-col items-center justify-center text-center px-4">
-        <div class="absolute inset-0 bg-[#1a1a1a] bg-cover bg-center z-[-1] brightness-[0.6]" style="background-image: url('public/hero.jpg');"></div>
+    <section class="relative h-[85vh] md:h-screen flex flex-col items-center justify-center text-center px-4 bg-black">
+        <div class="absolute inset-0 bg-cover bg-center z-[-1] brightness-[0.6]" style="background-image: url('hero%20banner%20img.jpg');"></div>
         
         <div class="z-10 mb-20">
             <h4 class="text-[#d4af37] text-xs md:text-sm font-bold tracking-[0.2em] mb-4 uppercase">Redefining Luxury Travel</h4>
             <h1 class="serif text-white text-5xl md:text-7xl leading-tight font-normal">Curated Villas.<br>Unmatched Elegance.</h1>
         </div>
 
-        <div class="absolute bottom-[-10px] md:bottom-12 w-11/12 max-w-6xl bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 shadow-2xl z-20">
+        <div class="absolute bottom-[-10px] md:bottom-12 w-11/12 max-w-6xl bg-black/50 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 shadow-2xl z-20">
             <form action="villa-list.html" method="GET" class="flex flex-col md:flex-row gap-4 items-end">
                 
                 <div class="flex-1 flex flex-col text-left w-full">
@@ -107,7 +115,7 @@
         </div>
     </section>
 
-    <section class="bg-[#111111] text-white py-24 px-4 text-center mt-12 md:mt-0">
+    <section class="bg-black text-white py-24 px-4 text-center mt-12 md:mt-0">
         <h5 class="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4">The BlossomStay Standard</h5>
         <h2 class="serif text-3xl md:text-5xl font-normal mb-16">Elevating Your Escape</h2>
         
@@ -135,40 +143,40 @@
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 py-16 space-y-12 bg-white rounded-2xl shadow-sm border border-gray-100 mt-12">
-        <h2 class="serif text-3xl md:text-4xl font-normal text-gray-900">Top Rated Villas</h2>
+    <section class="max-w-7xl mx-auto px-4 py-16 space-y-12 bg-[#0a0a0a] rounded-2xl border border-white/10 mt-12">
+        <h2 class="serif text-3xl md:text-4xl font-normal text-white text-center">Top Rated Villas</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a href="villa.html?id=20" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            <a href="villa.html?id=20" class="group block bg-[#111111] border border-white/5 rounded-xl overflow-hidden shadow-lg hover:border-[#d4af37]/50 transition-all duration-300">
                 <div class="h-60 overflow-hidden">
-                    <img src="public/villa/6979fd053adde.jpg" alt="5 BHK Batcom" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <img src="public/villa/6979fd053adde.jpg" alt="5 BHK Batcom" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100">
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-gray-900 text-lg mb-2">5 BHK Batcom</h3>
+                    <h3 class="font-bold text-white text-lg mb-2">5 BHK Batcom</h3>
                     <div class="flex items-center gap-2 text-[#d4af37] text-sm font-bold uppercase tracking-widest">
                         <i class="fa-solid fa-location-dot"></i> Karjat
                     </div>
                 </div>
             </a>
 
-            <a href="villa.html?id=69" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            <a href="villa.html?id=69" class="group block bg-[#111111] border border-white/5 rounded-xl overflow-hidden shadow-lg hover:border-[#d4af37]/50 transition-all duration-300">
                 <div class="h-60 overflow-hidden">
-                    <img src="public/villa/697f084cb5b66.jpg" alt="6 BHK Perche Offgrid" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <img src="public/villa/697f084cb5b66.jpg" alt="6 BHK Perche Offgrid" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100">
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-gray-900 text-lg mb-2">6 BHK Perche Offgrid</h3>
+                    <h3 class="font-bold text-white text-lg mb-2">6 BHK Perche Offgrid</h3>
                     <div class="flex items-center gap-2 text-[#d4af37] text-sm font-bold uppercase tracking-widest">
                         <i class="fa-solid fa-location-dot"></i> Lonavala / Pawna
                     </div>
                 </div>
             </a>
 
-            <a href="villa.html?id=19" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            <a href="villa.html?id=19" class="group block bg-[#111111] border border-white/5 rounded-xl overflow-hidden shadow-lg hover:border-[#d4af37]/50 transition-all duration-300">
                 <div class="h-60 overflow-hidden">
-                    <img src="public/villa/697f090e0f11d.jpg" alt="4 BHK Earth Farm" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <img src="public/villa/697f090e0f11d.jpg" alt="4 BHK Earth Farm" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100">
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-gray-900 text-lg mb-2">4 BHK Earth Farm</h3>
+                    <h3 class="font-bold text-white text-lg mb-2">4 BHK Earth Farm</h3>
                     <div class="flex items-center gap-2 text-[#d4af37] text-sm font-bold uppercase tracking-widest">
                         <i class="fa-solid fa-location-dot"></i> Lonavala / Pawna
                     </div>
@@ -177,28 +185,28 @@
         </div>
         
         <div class="text-center mt-12">
-            <a href="villa-list.html" class="text-gray-600 hover:text-gray-900 transition font-medium text-sm underline uppercase tracking-widest">View All Villas</a>
+            <a href="villa-list.html" class="text-[#d4af37] hover:text-white transition font-bold text-sm underline uppercase tracking-widest">View All Villas</a>
         </div>
     </section>
 
     <main class="max-w-7xl mx-auto px-4 py-16" id="main-content">
         
-        <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-900 group">
+        <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-[#111111] group border border-white/10">
             <div class="absolute inset-0">
-                <img src="public/villa/69c3f90b7e4d3.jpg" onerror="this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'" alt="Glass House Offer" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent"></div>
+                <img src="public/villa/69c3f90b7e4d3.jpg" onerror="this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'" alt="Glass House Offer" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-transparent"></div>
             </div>
 
             <div class="relative p-8 md:p-12 lg:p-16 max-w-3xl flex flex-col justify-center h-full text-white">
                 <h3 class="text-[#d4af37] font-bold tracking-wider text-sm md:text-base uppercase mb-2">Special Offer: Experience The Glass House</h3>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">JUST ₹1499/- <span class="text-2xl md:text-3xl font-semibold">PP</span></h1>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">JUST ₹1499/- <span class="text-2xl md:text-3xl font-semibold text-gray-400">PP</span></h1>
                 <h2 class="text-xl md:text-2xl font-bold mb-4">ALL FOOD & EXTRAS INCLUDED <span class="text-[#d4af37]">(FREE)</span></h2>
-                <p class="text-gray-200 text-sm md:text-base mb-8 max-w-xl leading-relaxed">
+                <p class="text-gray-300 text-sm md:text-base mb-8 max-w-xl leading-relaxed">
                     <strong class="text-[#d4af37]">Includes:</strong> All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
-                    <a href="villa.html?id=87" class="bg-[#d4af37] hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
+                    <a href="villa.html?id=87" class="bg-[#d4af37] hover:bg-white text-black font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
                         View Glass House Details
                     </a>
                 </div>
@@ -207,57 +215,57 @@
 
     </main>
 
-    <section class="bg-gray-50 py-20 border-t border-gray-100">
+    <section class="bg-[#0a0a0a] py-20 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h5 class="text-[#d4af37] font-bold tracking-widest uppercase text-xs mb-3">Guest Journal</h5>
-                <h2 class="serif text-4xl md:text-5xl font-normal text-gray-900">Unforgettable Stays</h2>
+                <h2 class="serif text-4xl md:text-5xl font-normal text-white">Unforgettable Stays</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="reviews-container">
                 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div class="bg-[#111111] p-8 rounded-2xl shadow-lg border border-white/5 flex flex-col justify-between hover:-translate-y-1 hover:border-[#d4af37]/30 transition-all duration-300">
                     <div>
                         <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                        <p class="text-gray-300 leading-relaxed mb-8 italic font-light">
                             "Your real review will go right here. The typography is set up to look clean, elegant, and easy to read."
                         </p>
                     </div>
-                    <div class="border-t border-gray-50 pt-4">
-                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
-                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    <div class="border-t border-white/10 pt-4">
+                        <div class="font-bold text-sm text-white tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-[#d4af37] mt-1 font-medium tracking-widest uppercase">Stayed at [Villa Name]</div>
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div class="bg-[#111111] p-8 rounded-2xl shadow-lg border border-white/5 flex flex-col justify-between hover:-translate-y-1 hover:border-[#d4af37]/30 transition-all duration-300">
                     <div>
                         <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                        <p class="text-gray-300 leading-relaxed mb-8 italic font-light">
                             "Another spot for a glowing review. This grid layout adjusts automatically for mobile phones."
                         </p>
                     </div>
-                    <div class="border-t border-gray-50 pt-4">
-                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
-                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    <div class="border-t border-white/10 pt-4">
+                        <div class="font-bold text-sm text-white tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-[#d4af37] mt-1 font-medium tracking-widest uppercase">Stayed at [Villa Name]</div>
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div class="bg-[#111111] p-8 rounded-2xl shadow-lg border border-white/5 flex flex-col justify-between hover:-translate-y-1 hover:border-[#d4af37]/30 transition-all duration-300">
                     <div>
                         <div class="flex gap-1 text-[#d4af37] text-sm mb-6">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-gray-600 leading-relaxed mb-8 italic">
+                        <p class="text-gray-300 leading-relaxed mb-8 italic font-light">
                             "We can add as many of these cards as you need. Just drop the text in!"
                         </p>
                     </div>
-                    <div class="border-t border-gray-50 pt-4">
-                        <div class="font-bold text-sm text-gray-900 tracking-wide uppercase">- Guest Name</div>
-                        <div class="text-xs text-gray-400 mt-1 font-medium">Stayed at [Villa Name]</div>
+                    <div class="border-t border-white/10 pt-4">
+                        <div class="font-bold text-sm text-white tracking-wide uppercase">- Guest Name</div>
+                        <div class="text-xs text-[#d4af37] mt-1 font-medium tracking-widest uppercase">Stayed at [Villa Name]</div>
                     </div>
                 </div>
 
@@ -269,7 +277,7 @@
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
-    <footer class="bg-[#111111] text-gray-400 py-12 text-center text-sm border-t border-gray-800">
+    <footer class="bg-black text-gray-400 py-12 text-center text-sm border-t border-white/10">
         <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
         <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
     </footer>
