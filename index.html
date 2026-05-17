@@ -14,7 +14,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
         
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc;}
+        /* Forced Dark Theme on Body */
+        body { font-family: 'Inter', sans-serif; background-color: #111111; color: white; }
         .serif { font-family: 'Playfair Display', serif; }
         .font-body { font-family: 'Montserrat', sans-serif; }
         
@@ -39,7 +40,7 @@
         }
     </style>
 </head>
-<body class="text-gray-900 overflow-x-hidden">
+<body class="bg-[#111111] overflow-x-hidden">
 
     <div class="bg-[#d4af37] text-black text-center py-2 px-4 text-xs md:text-sm font-bold tracking-widest z-50 relative">
         WEBSITE CURRENTLY UNDER MAINTENANCE. OUR CONCIERGE TEAM REMAINS AVAILABLE ON CALL AT +91 98765 43210.
@@ -147,23 +148,23 @@
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-16" id="main-content">
-        <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-900 group">
+    <main class="max-w-7xl mx-auto px-4 py-16 bg-[#111111]" id="main-content">
+        <section onclick="window.location.href='villa.html?id=87'" class="cursor-pointer relative w-full rounded-2xl overflow-hidden shadow-lg bg-[#1a1a1a] border border-gray-800 group">
             <div class="absolute inset-0">
-                <img src="public/villa/69c3f90b7e4d3.jpg" onerror="this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'" alt="Glass House Offer" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent"></div>
+                <img src="public/villa/69c3f90b7e4d3.jpg" onerror="this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'" alt="Glass House Offer" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/80 to-transparent"></div>
             </div>
 
             <div class="relative p-8 md:p-12 lg:p-16 max-w-3xl flex flex-col justify-center h-full text-white">
                 <h3 class="text-[#d4af37] font-bold tracking-wider text-sm md:text-base uppercase mb-2">Special Offer: Experience The Glass House</h3>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">JUST ₹1499/- <span class="text-2xl md:text-3xl font-semibold">PP</span></h1>
-                <h2 class="text-xl md:text-2xl font-bold mb-4">ALL FOOD & EXTRAS INCLUDED <span class="text-[#d4af37]">(FREE)</span></h2>
-                <p class="text-gray-200 text-sm md:text-base mb-8 max-w-xl leading-relaxed">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-white">JUST ₹1499/- <span class="text-2xl md:text-3xl font-semibold">PP</span></h1>
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-white">ALL FOOD & EXTRAS INCLUDED <span class="text-[#d4af37]">(FREE)</span></h2>
+                <p class="text-gray-300 text-sm md:text-base mb-8 max-w-xl leading-relaxed">
                     <strong class="text-[#d4af37]">Includes:</strong> All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
-                    <a href="villa.html?id=87" class="bg-[#d4af37] hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
+                    <a href="villa.html?id=87" class="bg-[#d4af37] hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-wider text-sm shadow-md">
                         View Glass House Details
                     </a>
                 </div>
@@ -206,7 +207,7 @@
                             <p class="text-gray-300 leading-relaxed mb-6 text-sm italic">"Extremely beautiful property and the view of the lake is exceptional. Very clean and well maintained. Caretakers - Mohit, was extremely accommodating to our requests and helped with every need. The food they cooked was very scrumptious."</p>
                         </div>
                         <div class="border-t border-gray-800 pt-4 mt-auto">
-                            <div class="font-bold text-sm text-white tracking-wide uppercase">- Sujeetha Nair</div>
+                            <div class="font-bold text-sm text-white tracking-wide uppercase">- Abhay Nair</div>
                             <div class="text-xs text-[#d4af37] mt-1 font-medium">Great Escape, Pawna Lake</div>
                         </div>
                     </div>
@@ -362,9 +363,62 @@
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
-    <footer class="bg-[#111111] text-gray-400 py-12 text-center text-sm border-t border-gray-800">
-        <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
-        <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
+    <footer class="bg-[#0a0a0a] text-gray-400 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div class="col-span-1 md:col-span-1">
+                <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
+                <p class="text-sm leading-relaxed mb-6 text-gray-400">Curated luxury villas across India. Experience unmatched elegance and bespoke hospitality for your perfect getaway.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-facebook text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Quick Links</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="villa-list.html" class="hover:text-[#d4af37] transition">Our Villas</a></li>
+                    <li><a href="about-us.html" class="hover:text-[#d4af37] transition">About Us</a></li>
+                    <li><a href="contact-us.html" class="hover:text-[#d4af37] transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-[#d4af37] transition">Guest Portal</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Destinations</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="villa-list.html?loc=Lonavala" class="hover:text-[#d4af37] transition">Lonavala</a></li>
+                    <li><a href="villa-list.html?loc=Karjat" class="hover:text-[#d4af37] transition">Karjat</a></li>
+                    <li><a href="villa-list.html?loc=Alibaug" class="hover:text-[#d4af37] transition">Alibaug</a></li>
+                    <li><a href="villa-list.html?loc=Pawna" class="hover:text-[#d4af37] transition">Pawna Lake</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Contact Us</h4>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-phone text-[#d4af37] mt-1"></i>
+                        <span>+91 98765 43210<br><span class="text-xs text-gray-500">24/7 Concierge</span></span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-envelope text-[#d4af37] mt-1"></i>
+                        <span class="hover:text-[#d4af37] cursor-pointer transition">hello@blossomstay.casa</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-xs text-center flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
+            <div class="space-x-4 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
     </footer>
 
     <script>
