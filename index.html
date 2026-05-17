@@ -60,20 +60,21 @@
 
     <section class="relative h-[85vh] md:h-screen flex flex-col items-center justify-center text-center px-4 bg-[#0a0a0a]">
         
-        <div class="z-10 mb-12 md:mb-24">
+        <div class="z-10 mb-12 md:mb-24 mt-10">
             <h4 class="text-[#d4af37] text-xs md:text-sm font-bold tracking-[0.2em] mb-4 uppercase">Redefining Luxury Travel</h4>
             <h1 class="serif text-white text-5xl md:text-7xl leading-tight font-normal">Curated Villas.<br>Unmatched Elegance.</h1>
         </div>
 
-        <div class="relative w-11/12 max-w-6xl rounded-2xl overflow-hidden shadow-2xl z-20 md:absolute md:bottom-12 border border-white/10">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('hero%20banner%20img.jpg');"></div>
-            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="relative w-11/12 max-w-6xl rounded-2xl overflow-hidden shadow-2xl z-20 md:absolute md:bottom-12 border border-white/10 bg-gray-900">
+            
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./hero banner img.jpg');"></div>
+            <div class="absolute inset-0 bg-black/40"></div>
 
             <form action="villa-list.html" method="GET" class="relative z-10 flex flex-col md:flex-row gap-6 items-end p-6 md:p-8">
                 
                 <div class="flex-1 flex flex-col text-left w-full">
                     <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Destination</label>
-                    <select name="loc" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
+                    <select name="loc" class="w-full bg-transparent border-b border-white/40 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
                         <option value="All">All Locations</option>
                         <option value="Karjat">Karjat</option>
                         <option value="Lonavala">Lonavala</option>
@@ -88,12 +89,12 @@
 
                 <div class="flex-1 flex flex-col text-left w-full">
                     <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Check-in / Out</label>
-                    <input type="text" name="dates" id="blossom-dates" placeholder="Select Dates" class="w-full bg-transparent border-b border-white/30 pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer" readonly="readonly">
+                    <input type="text" name="dates" id="blossom-dates" placeholder="Select Dates" class="w-full bg-transparent border-b border-white/40 pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer" readonly="readonly">
                 </div>
 
                 <div class="flex-1 flex flex-col text-left w-full">
                     <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Bedrooms</label>
-                    <select name="bhk" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
+                    <select name="bhk" class="w-full bg-transparent border-b border-white/40 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
                         <option value="All">Any Size</option>
                         <option value="1">1 BHK</option>
                         <option value="2">2 BHK</option>
