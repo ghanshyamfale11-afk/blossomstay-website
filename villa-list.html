@@ -14,6 +14,12 @@
         body { font-family: 'Inter', sans-serif; background-color: #111111; color: white; }
         .serif { font-family: 'Playfair Display', serif; }
         .font-body { font-family: 'Montserrat', sans-serif; }
+        
+        /* Ensures dropdown options are readable */
+        option {
+            color: black;
+            background: white;
+        }
     </style>
 </head>
 <body class="bg-[#111111] overflow-x-hidden">
@@ -32,28 +38,69 @@
         </div>
     </nav>
 
-    <section class="bg-[#111111] py-16 border-b border-gray-800">
+    <section class="bg-[#111111] pt-16 pb-8 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h5 class="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4">The Collection</h5>
             <h1 class="serif text-4xl md:text-6xl font-normal text-white leading-tight">Curated Luxury Villas</h1>
             <p id="search-status" class="text-gray-400 mt-6 max-w-xl mx-auto text-sm leading-relaxed">Browsing all exclusive properties.</p>
-            <button id="clear-filters-btn" onclick="window.location.href='villa-list.html'" class="hidden mt-6 bg-transparent border border-[#d4af37] text-[#d4af37] font-bold px-6 py-2 rounded text-xs uppercase tracking-wider hover:bg-[#d4af37] hover:text-black transition duration-300">
-                Clear Filters
-            </button>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-20">
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <div class="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-6 mb-12 flex flex-col md:flex-row gap-6 items-end shadow-xl">
+            <div class="flex-1 flex flex-col w-full">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Location</label>
+                <select id="page-loc-filter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
+                    <option value="All">All Locations</option>
+                    <option value="Karjat">Karjat</option>
+                    <option value="Lonavala">Lonavala</option>
+                    <option value="Pawna">Pawna Lake</option>
+                    <option value="Alibaug">Alibaug</option>
+                    <option value="Khandala">Khandala</option>
+                    <option value="Igatpuri">Igatpuri</option>
+                    <option value="Panchgani">Panchgani</option>
+                    <option value="Mahableshwar">Mahableshwar</option>
+                </select>
+            </div>
+            
+            <div class="flex-1 flex flex-col w-full">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Bedrooms</label>
+                <select id="page-bhk-filter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
+                    <option value="All">Any Size</option>
+                    <option value="1">1 BHK</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4">4 BHK</option>
+                    <option value="5">5 BHK</option>
+                    <option value="6">6 BHK</option>
+                    <option value="7">7 BHK</option>
+                    <option value="8">8 BHK</option>
+                    <option value="10">10 BHK</option>
+                    <option value="12">12 BHK</option>
+                </select>
+            </div>
+
+            <div class="flex-1 flex flex-col w-full relative">
+                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Search</label>
+                <input type="text" id="page-search-filter" placeholder="e.g. Glass House" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] placeholder-gray-600">
+                <i class="fa-solid fa-magnifying-glass absolute right-2 bottom-3 text-gray-500 text-xs"></i>
+            </div>
+
+            <div class="w-full md:w-auto">
+                <button id="clear-page-filters" class="w-full md:w-auto border border-gray-600 text-gray-400 hover:text-white hover:border-white px-6 py-2 rounded text-xs font-bold tracking-widest uppercase transition duration-300">
+                    Clear
+                </button>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="villa-grid">
             </div>
 
         <div id="no-villas" class="hidden text-center py-16">
             <i class="fa-solid fa-house-chimney-slash text-6xl text-gray-700 mb-6"></i>
             <h3 class="serif text-2xl text-white">No villas match your exact search.</h3>
-            <p class="text-gray-500 mt-4 text-sm max-w-md mx-auto">Try adjusting your filters or browse our full collection.</p>
-            <button onclick="window.location.href='villa-list.html'" class="mt-8 bg-[#d4af37] text-black font-bold px-6 py-3 rounded text-xs uppercase tracking-wider hover:bg-yellow-500 transition">
-                View All Villas
-            </button>
+            <p class="text-gray-500 mt-4 text-sm max-w-md mx-auto">Try clearing your filters to see more properties.</p>
         </div>
     </main>
 
@@ -63,7 +110,6 @@
 
     <footer class="bg-[#0a0a0a] text-gray-400 py-16 border-t border-gray-800 mt-auto">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-            
             <div class="col-span-1 md:col-span-1">
                 <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
                 <p class="text-sm leading-relaxed mb-6 text-gray-400">Curated luxury villas across India. Experience unmatched elegance and bespoke hospitality for your perfect getaway.</p>
@@ -72,7 +118,6 @@
                     <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-facebook text-xl"></i></a>
                 </div>
             </div>
-
             <div>
                 <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Quick Links</h4>
                 <ul class="space-y-3 text-sm">
@@ -81,7 +126,6 @@
                     <li><a href="contact-us.html" class="hover:text-[#d4af37] transition">Contact</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Destinations</h4>
                 <ul class="space-y-3 text-sm">
@@ -91,7 +135,6 @@
                     <li><a href="villa-list.html?loc=Pawna" class="hover:text-[#d4af37] transition">Pawna Lake</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Contact Us</h4>
                 <ul class="space-y-4 text-sm">
@@ -105,9 +148,7 @@
                     </li>
                 </ul>
             </div>
-
         </div>
-        
         <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-xs text-center flex flex-col md:flex-row justify-between items-center">
             <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
             <div class="space-x-4 mt-4 md:mt-0">
@@ -118,7 +159,7 @@
     </footer>
 
     <script>
-        // Your complete extracted villa database
+        // FULL VILLA DATABASE
         const villas = [
             // 1 BHK
             { bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697deba4b2c24.jpg", url: "villa-detail/25.html" },
@@ -192,7 +233,7 @@
             { bhk: 7, title: "7 BHK BUDDHA VIHAR", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/697f0a42523a9.jpg", url: "villa-detail/72.html" },
             { bhk: 7, title: "7 BHK LUXURY HUT VILLA", loc: "KARJAT", priceWd: "52000", priceWe: "90000", img: "public/villa/697c55c302d4e.jpg", url: "villa-detail/71.html" },
             { bhk: 7, title: "7 BHK IGRI HORA TURF VILLA", loc: "IGATPURI", priceWd: "19500", priceWe: "39500", img: "public/villa/697c54c757230.jpg", url: "villa-detail/70.html" },
-            { bhk: 7, title: "7 BHK LOHKRA VILLA", loc: "LONAVALA", priceWd: "27000", priceWe: "42000", img: "public/villa/6979ff8579761.jpg", url: "villa-detail/22.html" },
+            { bhk: 7, title: "7 BHK LOHKRA VILLA", loc: "LONAVALA", priceWd: "27000", priceWe: "42000", img: "public/villa/6979ff8579761.url", url: "villa-detail/22.html" },
 
             // 8 BHK
             { bhk: 8, title: "8 BHK MAHABIR VILLA", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/69c3f9d0b9386.jpg", url: "villa-detail/78.html" },
@@ -210,10 +251,14 @@
             { bhk: 12, title: "12 BHK SINGARA VILLA", loc: "KARJAT", priceWd: "44000", priceWe: "88000", img: "public/villa/69d518437cf8f.jpg", url: "villa-detail/81.html" }
         ];
 
+        // UI Elements
         const grid = document.getElementById('villa-grid');
         const noVillas = document.getElementById('no-villas');
         const status = document.getElementById('search-status');
-        const clearBtn = document.getElementById('clear-filters-btn');
+        const pageLocFilter = document.getElementById('page-loc-filter');
+        const pageBhkFilter = document.getElementById('page-bhk-filter');
+        const pageSearchFilter = document.getElementById('page-search-filter');
+        const clearPageFiltersBtn = document.getElementById('clear-page-filters');
 
         // Function to create a luxury card for each villa
         function createCard(v) {
@@ -269,34 +314,77 @@
             });
         }
 
-        // URL parsing and filtering logic
-        const urlParams = new URLSearchParams(window.location.search);
-        const locFilter = urlParams.get('loc');
-        const bhkFilter = urlParams.get('bhk');
+        // Core Filtering Logic
+        function applyFilters() {
+            let filtered = villas;
+            const locVal = pageLocFilter.value;
+            const bhkVal = pageBhkFilter.value;
+            const searchVal = pageSearchFilter.value.toLowerCase();
 
-        let filteredVillas = villas;
-        let activeFilters = [];
+            // Filter by Location
+            if (locVal && locVal !== 'All') {
+                filtered = filtered.filter(v => v.loc.toLowerCase().includes(locVal.toLowerCase()));
+            }
+            
+            // Filter by BHK
+            if (bhkVal && bhkVal !== 'All') {
+                filtered = filtered.filter(v => v.bhk.toString() === bhkVal);
+            }
 
-        // Apply Location Filter
-        if (locFilter && locFilter !== 'All') {
-            filteredVillas = filteredVillas.filter(v => v.loc.toLowerCase().includes(locFilter.toLowerCase()));
-            activeFilters.push(locFilter);
+            // Filter by Search Input
+            if (searchVal) {
+                filtered = filtered.filter(v => v.title.toLowerCase().includes(searchVal) || v.loc.toLowerCase().includes(searchVal));
+            }
+
+            // Update UI Grid
+            displayVillas(filtered);
+            
+            // Update Status Text
+            let activeFilters = [];
+            if(locVal !== 'All') activeFilters.push(locVal);
+            if(bhkVal !== 'All') activeFilters.push(`${bhkVal} BHK`);
+            if(searchVal) activeFilters.push(`"${searchVal}"`);
+            
+            if(activeFilters.length > 0) {
+                status.innerHTML = `Showing results for: <strong class="text-white">${activeFilters.join(' & ')}</strong>`;
+            } else {
+                status.innerHTML = `Browsing all exclusive properties.`;
+            }
         }
+
+        // Event Listeners for Live Filtering
+        pageLocFilter.addEventListener('change', applyFilters);
+        pageBhkFilter.addEventListener('change', applyFilters);
+        pageSearchFilter.addEventListener('input', applyFilters);
         
-        // Apply BHK Filter
-        if (bhkFilter && bhkFilter !== 'All') {
-            filteredVillas = filteredVillas.filter(v => v.bhk.toString() === bhkFilter);
-            activeFilters.push(`${bhkFilter} BHK`);
-        }
+        // Clear Filters Button Logic
+        clearPageFiltersBtn.addEventListener('click', () => {
+            pageLocFilter.value = 'All';
+            pageBhkFilter.value = 'All';
+            pageSearchFilter.value = '';
+            applyFilters();
+            // Clear the URL parameters without reloading the page
+            window.history.replaceState({}, document.title, window.location.pathname);
+        });
 
-        // Update UI based on filters
-        if (activeFilters.length > 0) {
-            status.innerHTML = `Showing results for: <strong class="text-white">${activeFilters.join(' & ')}</strong>`;
-            clearBtn.classList.remove('hidden');
-        }
+        // Setup Initial State from Homepage Redirect (URL Parameters)
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let hasParams = false;
 
-        // Initial render
-        displayVillas(filteredVillas);
+            if (urlParams.get('loc')) {
+                pageLocFilter.value = urlParams.get('loc');
+                hasParams = true;
+            }
+            if (urlParams.get('bhk')) {
+                pageBhkFilter.value = urlParams.get('bhk');
+                hasParams = true;
+            }
+
+            // Run initial filter to apply URL params or show all
+            applyFilters();
+        });
+
     </script>
 </body>
 </html>
